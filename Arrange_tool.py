@@ -1,9 +1,9 @@
 # coding:gbk
 # *******************************************
-# ×÷Õß: ÎÒ–|
+# ä½œè€…: æˆ‘æ±
 # mail:wodong526@dingtalk.com
-# time:2022/3/7
-# °æ±¾£ºV1.1
+# time:2022/3/10
+# ç‰ˆæœ¬ï¼šV1.2
 # ******************************************
 from PySide2 import QtGui
 from PySide2 import QtCore
@@ -14,7 +14,7 @@ import maya.cmds as mc
 import maya.OpenMaya as om
 
 
-edition = 'V1.1'  # °æ±¾ºÅ
+edition = 'V1.2'  # ç‰ˆæœ¬å·
 
 
 def maya_main_window():
@@ -26,57 +26,57 @@ class PlaceObj(QtWidgets.QDialog):
     def __init__(self, parent=maya_main_window()):
         super(PlaceObj, self).__init__(parent)
 
-        self.setWindowTitle(u'–|ÅÆÅÅ²¼¹¤¾ß.{}'.format(edition))
+        self.setWindowTitle(u'æ±ç‰Œæ’å¸ƒå·¥å…·.{}'.format(edition))
         self.setMinimumWidth(250)
         self.setMinimumHeight(150)
 
-        self.setWindowFlags(self.windowFlags() ^ QtCore.Qt.WindowContextHelpButtonHint)  # È¥³ı´°¿ÚÉÏµÄÎÊºÅ
+        self.setWindowFlags(self.windowFlags() ^ QtCore.Qt.WindowContextHelpButtonHint)  # å»é™¤çª—å£ä¸Šçš„é—®å·
 
         self.crea_widgets()
         self.crea_layouts()
         self.crea_connections()
 
     def crea_widgets(self):
-        self.but_getObj = QtWidgets.QPushButton(u'»ñÈ¡ÎïÌå')
-        self.but_getObj.setFont(QtGui.QFont('ºÚÌå', 15))
+        self.but_getObj = QtWidgets.QPushButton(u'è·å–ç‰©ä½“')
+        self.but_getObj.setFont(QtGui.QFont('é»‘ä½“', 15))
         
-        self.but_run = QtWidgets.QPushButton(u'ÅÅ  ²¼')
-        self.but_run.setFont(QtGui.QFont('ºÚÌå', 20))
+        self.but_run = QtWidgets.QPushButton(u'æ’  å¸ƒ')
+        self.but_run.setFont(QtGui.QFont('é»‘ä½“', 20))
         self.but_run.setMinimumSize(80,50)
         self.but_run.setEnabled(False)
         
         self.but_undo = QtWidgets.QPushButton()
         self.but_undo.setMaximumSize(40, 50)
         self.but_undo.setIcon(QtGui.QIcon(':undo.png'))
-        self.but_undo.setToolTip(u'»Ø¹éÎïÌåÔ­Ê¼Î»ÖÃ')
+        self.but_undo.setToolTip(u'å›å½’ç‰©ä½“åŸå§‹ä½ç½®')
         
-        self.lab_wid_ivl = QtWidgets.QLabel(u'ºáÏò¼ä¸ô:')
-        self.lab_wid_ivl.setFont(QtGui.QFont('ºÚÌå', 9))
+        self.lab_wid_ivl = QtWidgets.QLabel(u'æ¨ªå‘é—´éš”:')
+        self.lab_wid_ivl.setFont(QtGui.QFont('é»‘ä½“', 9))
         self.lab_wid_ivl.setMinimumSize(50,30)
         
-        self.lab_hgt_ivl = QtWidgets.QLabel(u'ÊúÏò¼ä¸ô')
-        self.lab_hgt_ivl.setFont(QtGui.QFont('ºÚÌå', 9))
+        self.lab_hgt_ivl = QtWidgets.QLabel(u'ç«–å‘é—´éš”')
+        self.lab_hgt_ivl.setFont(QtGui.QFont('é»‘ä½“', 9))
         self.lab_hgt_ivl.setMinimumSize(50, 30)
         
-        self.lab_num = QtWidgets.QLabel(u'Ã¿ĞĞ¸öÊı:')
-        self.lab_num.setFont(QtGui.QFont('ºÚÌå', 9))
+        self.lab_num = QtWidgets.QLabel(u'æ¯è¡Œä¸ªæ•°:')
+        self.lab_num.setFont(QtGui.QFont('é»‘ä½“', 9))
         self.lab_num.setMinimumSize(50,30)
         
         self.dsbox_hgt_ivl = QtWidgets.QDoubleSpinBox()
         self.dsbox_hgt_ivl.setMinimumHeight(20)
-        self.dsbox_hgt_ivl.setFont(QtGui.QFont('ºÚÌå', 10))
+        self.dsbox_hgt_ivl.setFont(QtGui.QFont('é»‘ä½“', 10))
         self.dsbox_hgt_ivl.setSingleStep(0.01)
         self.dsbox_hgt_ivl.setMinimum(-999)
         
         self.dsbox_wid_ivl = QtWidgets.QDoubleSpinBox()
         self.dsbox_wid_ivl.setMinimumHeight(20)
-        self.dsbox_wid_ivl.setFont(QtGui.QFont('ºÚÌå', 10))
+        self.dsbox_wid_ivl.setFont(QtGui.QFont('é»‘ä½“', 10))
         self.dsbox_wid_ivl.setSingleStep(0.01)
         self.dsbox_wid_ivl.setMinimum(-999)
         
         self.spbox_num = QtWidgets.QSpinBox()
         self.spbox_num.setMinimumHeight(20)
-        self.spbox_num.setFont(QtGui.QFont('ºÚÌå', 10))
+        self.spbox_num.setFont(QtGui.QFont('é»‘ä½“', 10))
         self.spbox_num.setMinimum(1)
         self.spbox_num.setMaximum(9999)
         
@@ -85,7 +85,7 @@ class PlaceObj(QtWidgets.QDialog):
         for inf in radBut_lis:
             rad_but = QtWidgets.QRadioButton()
             rad_but.setText(inf)
-            rad_but.setFont(QtGui.QFont('ºÚÌå', 15))
+            rad_but.setFont(QtGui.QFont('é»‘ä½“', 15))
             self.radBut_dir[inf] = rad_but
         self.radBut_dir[u'+xy'].setChecked(True)
 
@@ -133,7 +133,7 @@ class PlaceObj(QtWidgets.QDialog):
     
     def crea_run(self):
         if int(self.spbox_num.value()) > len(self.sel_nem_lis):
-            mc.warning('Ã¿ĞĞ¸öÊı³¬³öËùÑ¡ÔñµÄÎïÌå¸öÊı¡£')
+            mc.warning('æ¯è¡Œä¸ªæ•°è¶…å‡ºæ‰€é€‰æ‹©çš„ç‰©ä½“ä¸ªæ•°ã€‚')
             return False
         
         sel_bbox_lis = []
@@ -143,12 +143,12 @@ class PlaceObj(QtWidgets.QDialog):
         for inf in range(len(sel_bbox_lis)):
             self.sel_dir[self.sel_nem_lis[inf]] = sel_bbox_lis[inf]
         
-        obj_lis = self.get_sort_lis(self.sel_dir, self.if_redBool())#ÕûÊıĞĞÁĞµÄÎïÌå
-        ivl_num = float(self.dsbox_wid_ivl.value())                 #ºáÏò¼ä¸ô¾àÀë
-        hg_num  = float(self.dsbox_hgt_ivl.value())                 #ÊúÏò¼ä¸ô¾àÀë
-        col_num = int(self.spbox_num.value())                       #ÁĞÊı
-        row_num = int(len(self.sel_nem_lis) / col_num)              #ĞĞÊı
-        row_hgt = self.crea_sort(obj_lis, row_num, col_num, hg_num) #ÎïÌåµÄ¸ß¶ÈÖµ
+        obj_lis = self.get_sort_lis(self.sel_dir, self.if_redBool())#æ•´æ•°è¡Œåˆ—çš„ç‰©ä½“
+        ivl_num = float(self.dsbox_wid_ivl.value())                 #æ¨ªå‘é—´éš”è·ç¦»
+        hg_num  = float(self.dsbox_hgt_ivl.value())                 #ç«–å‘é—´éš”è·ç¦»
+        col_num = int(self.spbox_num.value())                       #åˆ—æ•°
+        row_num = int(len(self.sel_nem_lis) / col_num)              #è¡Œæ•°
+        row_hgt = self.crea_sort(obj_lis, row_num, col_num, hg_num) #ç‰©ä½“çš„é«˜åº¦å€¼
         
         obj_abs = self.get_absolutely_position()
         if self.if_redBool() == '+xy':
@@ -289,8 +289,8 @@ class PlaceObj(QtWidgets.QDialog):
             obj_hgt_dir = {}
             obj_wit_dir = {}
             for inf in obj_dir.keys():
-                obj_hgt_xy = obj_dir[inf][4] - obj_dir[inf][1]#¸ß¶È
-                obj_wit_xy = obj_dir[inf][3] - obj_dir[inf][0]#¿í¶È
+                obj_hgt_xy = obj_dir[inf][4] - obj_dir[inf][1]#é«˜åº¦
+                obj_wit_xy = obj_dir[inf][3] - obj_dir[inf][0]#å®½åº¦
                 obj_hgt_dir[inf] = obj_hgt_xy
                 obj_wit_dir[inf] = obj_wit_xy
                 obj_dir[inf] = obj_wit_xy * obj_hgt_xy
@@ -323,7 +323,7 @@ class PlaceObj(QtWidgets.QDialog):
                 
             for inf in sorted(obj_dir, key = obj_dir.__getitem__):
                 sort_lis.append([inf, obj_wit_dir[inf], obj_wit_dir[inf] / 2, obj_hgt_dir[inf]])
-        return sort_lis#»ñÈ¡ÎïÌåÃû¡¢ÎïÌå¿í¡¢¿íµÄÒ»°ë¡¢¸ß
+        return sort_lis#è·å–ç‰©ä½“åã€ç‰©ä½“å®½ã€å®½çš„ä¸€åŠã€é«˜
 
     def crea_sort(self, obj_lis, row, col, height):
         hgt = [0]
@@ -338,14 +338,14 @@ class PlaceObj(QtWidgets.QDialog):
         
         ret_lis_b = ret_lis[:]
         del ret_lis_b[0]
-        for inf in range(len(ret_lis_b)):#´ÓÏÖÔÚ¿ªÊ¼ ÇóµÄÊÇ´ÓµÚ¶şĞĞ¿ªÊ¼µÄÎïÌåµÄ¸ß¶È
-            hgt.append(ret_lis_b[inf][3] / 2 + ret_lis[inf][3] / 2 + hgt[inf] + height)#ÕâÒ»ĞĞµÄ×î¸ßÎïÌåµÄ¸ß¶ÈµÄÒ»°ë£¬¼ÓÉÏÕâÒ»ĞĞµÄÏÂÒ»ĞĞµÄÎïÌåµÄ¸ß¶ÈµÄÒ»°ë£¬¼ÓÉÏÕâÒ»ĞĞµÄÏÂÒ»ĞĞµÄ¸ß¶È
+        for inf in range(len(ret_lis_b)):#ä»ç°åœ¨å¼€å§‹ æ±‚çš„æ˜¯ä»ç¬¬äºŒè¡Œå¼€å§‹çš„ç‰©ä½“çš„é«˜åº¦
+            hgt.append(ret_lis_b[inf][3] / 2 + ret_lis[inf][3] / 2 + hgt[inf] + height)#è¿™ä¸€è¡Œçš„æœ€é«˜ç‰©ä½“çš„é«˜åº¦çš„ä¸€åŠï¼ŒåŠ ä¸Šè¿™ä¸€è¡Œçš„ä¸‹ä¸€è¡Œçš„ç‰©ä½“çš„é«˜åº¦çš„ä¸€åŠï¼ŒåŠ ä¸Šè¿™ä¸€è¡Œçš„ä¸‹ä¸€è¡Œçš„é«˜åº¦
         return hgt
     
     def get_sel_lis(self):
         self.sel_nem_lis = mc.ls(sl = True)
         if not self.sel_nem_lis:
-            om.MGlobal.displayError('Ñ¡ÔñÁĞ±íÎª¿Õ¡£')
+            om.MGlobal.displayError('é€‰æ‹©åˆ—è¡¨ä¸ºç©ºã€‚')
             return False
         elif self.sel_nem_lis:
             self.but_run.setEnabled(True)
